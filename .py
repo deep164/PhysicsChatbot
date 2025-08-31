@@ -1,5 +1,3 @@
-# filename: physics_chatbot.py
-
 import streamlit as st
 from openai import OpenAI
 
@@ -11,9 +9,9 @@ st.title("⚛️ Physics Chatbot")
 st.subheader("Ask me any physics concept and I will explain it!")
 
 # -------------------------
-# Initialize OpenAI client
+# Initialize OpenAI client with secret key
 # -------------------------
-api_key = st.secrets["OPENAI_API_KEY"]  # Streamlit ke liye recommended
+api_key = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=api_key)
 
 # -------------------------
@@ -56,9 +54,6 @@ if st.button("Send") and user_input:
     # Store in session
     st.session_state.history.append({"user": user_input, "bot": bot_response})
     
-    # Clear input
-    user_input = ""
-    
 # Display all chats
 for chat in st.session_state.history:
     st.markdown(f"**You:** {chat['user']}")
@@ -71,3 +66,4 @@ for chat in st.session_state.history:
 if st.button("Reset Chat"):
     st.session_state.history = []
     st.experimental_rerun()
+
